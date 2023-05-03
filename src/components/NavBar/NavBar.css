@@ -1,0 +1,55 @@
+nav {
+    height: 84px;
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    width: 146px;
+    justify-content: space-between;
+    margin-right: 280px;
+}
+
+.logo-image {
+    width: 36px;
+    height: 36px;
+}
+
+.logo-name {
+    width: 99px;
+    height: 36px;
+}
+
+.logo-name p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.02em;
+    color: #232134;
+}
+
+nav ul {
+    width: 275px;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+nav a {
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #232134;
+}
+
+nav a:hover {
+color: #5E96FC;
+font-weight: 500;
+}

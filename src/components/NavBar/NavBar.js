@@ -1,8 +1,17 @@
 import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 
 const NavBar = () => {
   return (
     <nav>
+      <div className="logo">
+        
+          <img src="img/Union.png" alt="" className="logo-image"></img>
+      
+        <div className="logo-name">
+            <p>Jobored</p>
+        </div>
+      </div>
       <ul>
         <li>
           <NavLink to="/">Поиск вакансий</NavLink>
