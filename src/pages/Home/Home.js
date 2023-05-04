@@ -1,8 +1,9 @@
 import React from 'react'
+import './Home.css'
 
 const Home = () => {
   return (
-    <div>Поиск вакансий</div>
+    <div className='search-page'>Поиск вакансий</div>
   )
 }
 
