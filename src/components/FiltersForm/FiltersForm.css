@@ -1,5 +1,91 @@
 .filters-form {
     width: 315px;
     height: 360px;
-    border: 1px solid grey;
+    background: #FFFFFF;
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex-direction;
+    flex-direction: column;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.filters h2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: #232134;
+}
+
+.filters button {
+    width: 115px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;   
+    justify-content: space-between; 
+    color: #ACADB9;
+    outline: none;
+    border: none;
+    background: #FFFFFF;
+    cursor: pointer;
+  
+}
+
+.industry {
+    height: 69px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #232134;
+}
+
+.salary {
+    height: 119px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.apply {
+    width: 275px;
+    height: 40px;
+    background: #5E96FC;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+
+}
+
+.apply:hover {
+    background: #3B7CD3;
 }

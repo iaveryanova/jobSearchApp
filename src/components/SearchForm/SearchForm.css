@@ -41,6 +41,7 @@
     color: white;
     outline: none;
     border: none;
+    cursor: pointer;
     background: #5E96FC;
     border-radius: 8px;
     width: 83px;
