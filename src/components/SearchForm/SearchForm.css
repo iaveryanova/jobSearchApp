@@ -32,27 +32,6 @@
     color: #ACADB9;
 }
 
-.btn-search {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
-    color: white;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    background: #5E96FC;
-    border-radius: 8px;
-    width: 83px;
-    height: 32px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 20px;
-}
-
 .btn-search:hover {
     background: #3B7CD3;
 }

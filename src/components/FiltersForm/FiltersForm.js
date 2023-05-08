@@ -1,20 +1,49 @@
 import React from "react";
 import "./FiltersForm.css";
 import { Select } from "@mantine/core";
+import { Button } from '@mantine/core';
+import { IconChevronDown } from '@tabler/icons-react';
+
 
 const FiltersForm = () => {
   return (
     <div className="filters-form">
       <div className="filters">
         <h2>Фильтры</h2>
-        <button>
-          Сбросить все
-          <img src="img/Cross_grey.png" />
-        </button>
+        <Button 
+        rightIcon={<img src="img/Cross_grey.svg" />} 
+        variant="white"
+         styles={(theme) => ({
+            root: {
+                border: 'none',
+                boxSizing: 'border-box',
+                width: '115px',
+                height: '20px',
+                fontFamily: 'Inter',
+                fontStyle: 'normal',
+                fontWeight: '500',
+                fontSize: '14px',
+                lineHeight: '20px',
+                padding: '0px',
+                color: '#ACADB9'
+            },
+            rightIcon: {
+                margin: '0px'
+            },
+            inner: {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+            }
+            })}
+        >
+      Сбросить все
+    </Button>
       </div>
       <div className="industry">
         <h3>Отрасль</h3>
         <Select
+        rightSection={<img src="img/Arrow_down.svg" />}
         styles={(theme) => ({
             input: {
                 width: '275px',
@@ -40,6 +69,7 @@ const FiltersForm = () => {
       <div className="salary">
         <h3>Оклад</h3>
         <Select
+        rightSection={<img src="img/Arrows.svg" />}
         styles={(theme) => ({
             input: {
                 width: '275px',
@@ -62,6 +92,7 @@ const FiltersForm = () => {
           ]}
         />
         <Select
+        rightSection={<img src="img/Arrows.svg" />}
         styles={(theme) => ({
             input: {
                 width: '275px',
@@ -84,7 +115,24 @@ const FiltersForm = () => {
           ]}
         />
       </div>
-      <button className="apply">Применить</button>
+      {/* <button className="apply">Применить</button> */}
+      <Button
+      styles={(theme) => ({
+        root: {
+            width: '275px',
+            height: '40px',
+            background: '#5E96FC',
+            borderRadius: '8px',
+            fontFamily: 'Inter',
+            fontWeight: '500',
+            fontSize: '14px',
+            lineHeight: '21px',
+            textAlign: 'center',
+            color: '#FFFFFF'
+        }
+        })}>
+      Применить
+    </Button>
     </div>
   );
 };
