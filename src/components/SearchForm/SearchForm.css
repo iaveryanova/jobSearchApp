@@ -1,8 +1,6 @@
 .search {
     background: #FFFFFF;
-    /* width: 773px; */
-    /* width: 100%; */
-    width: calc(100% - 28px - 315px);
+    width: 100%;
     height: 48px;
     border: 1px solid  #EAEBED;
     border-radius: 8px;

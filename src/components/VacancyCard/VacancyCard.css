@@ -1,0 +1,68 @@
+.vacancy-card {
+    background: #FFFFFF;
+    width: 100%;
+    height: 137px;
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+    margin-top: 16px;
+    padding: 24px 25px 24.5px 24px;
+}
+
+.vacancy-data {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+.vacancy-title {
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #5E96FC;
+}
+
+.vacancy-details {
+    display: flex;
+    margin-top: 12.5px;
+    margin-bottom: 13px;
+}
+
+.vacancy-details img {
+    margin: 0 12px;
+}
+
+.vacancy-salary {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #232134;
+}
+
+.vacancy-schedule {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #232134;
+}
+
+.vacancy-location {
+    display: flex;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #232134;
+}
+
+.vacancy-location img{
+    margin-right: 11.33px
+}
