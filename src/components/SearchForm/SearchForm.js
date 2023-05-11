@@ -1,8 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './SearchForm.css'
 import { Button } from '@mantine/core';
 
 const SearchForm = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleButtonHover = () => {
+    setIsButtonHovered(true);
+  };
+
+  const handleButtonLeave = () => {
+    setIsButtonHovered(false);
+  };
   return (
     <div className="search">
         <img src="img/Search.svg" alt=""></img>
@@ -10,14 +24,21 @@ const SearchForm = () => {
           type="text"
           className="input-search"
           placeholder="Введите название вакансии"
+          value={inputValue}
+          onChange={handleInputChange}
         />
 
         <Button
+        onMouseEnter={inputValue ? handleButtonHover : null}
+        onMouseLeave={inputValue ? handleButtonLeave : null}
+        // disabled={!inputValue}
+        disabled ={!inputValue}
+          sx={{ '&[data-disabled]': { background: '#92C1FF', color: '#FFFFFF', fontFamily: 'Inter', fontWeight: '500', fontSize: '14px', lineHeight: '21px', } }}
       styles={(theme) => ({
         root: {
             width: '83px',
             height: '32px',
-            background: '#5E96FC',
+              background: inputValue && isButtonHovered ? '#3B7CD3' : '#5E96FC',
             borderRadius: '8px',
             fontFamily: 'Inter',
             fontWeight: '500',
@@ -30,7 +51,11 @@ const SearchForm = () => {
         },
         inner: {
           width: '43px'
-        }
+        },
+        // disabled: {
+        //   background: '#92C1FF', 
+        //   cursor: 'not-allowed'
+        // },
         })}>
       Поиск
       </Button>

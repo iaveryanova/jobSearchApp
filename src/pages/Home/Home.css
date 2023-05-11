@@ -7,3 +7,7 @@
 .vacancies {
     width: calc(100% - 28px - 315px);
 }
+
+.pagination {
+    margin-top:40px;
+}

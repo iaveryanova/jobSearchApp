@@ -2,7 +2,7 @@ import React from "react";
 import "./FiltersForm.css";
 import { Select } from "@mantine/core";
 import { Button } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons-react';
+
 
 
 const FiltersForm = () => {
