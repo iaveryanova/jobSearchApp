@@ -50,24 +50,14 @@ h3 {
     margin-bottom: 20px;
 }
 
-.apply {
-    width: 275px;
-    height: 40px;
-    background: #5E96FC;
-    border-radius: 8px;
-    outline: none;
-    border: none;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: center;
-    color: #FFFFFF;
-    cursor: pointer;
-
-}
-
 .apply:hover {
     background: #3B7CD3;
+}
+
+.reset:hover {
+    color: #5E96FC;;
+}
+
+.arrow-up {
+    margin-bottom: 9px;
 }

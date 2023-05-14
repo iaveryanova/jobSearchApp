@@ -30,10 +30,8 @@ const SearchForm = () => {
 
         <Button
         onMouseEnter={inputValue ? handleButtonHover : null}
-        onMouseLeave={inputValue ? handleButtonLeave : null}
-        // disabled={!inputValue}
-        disabled ={!inputValue}
-          sx={{ '&[data-disabled]': { background: '#92C1FF', color: '#FFFFFF', fontFamily: 'Inter', fontWeight: '500', fontSize: '14px', lineHeight: '21px', } }}
+        onMouseLeave={inputValue ? handleButtonLeave : null}        disabled ={!inputValue}
+          sx={{ '&[data-disabled]': { background: '#92C1FF', color: '#FFFFFF', fontFamily: 'Inter', fontWeight: '500', fontSize: '14px', lineHeight: '21px', borderRadius: '8px' } }}
       styles={(theme) => ({
         root: {
             width: '83px',
@@ -52,10 +50,6 @@ const SearchForm = () => {
         inner: {
           width: '43px'
         },
-        // disabled: {
-        //   background: '#92C1FF', 
-        //   cursor: 'not-allowed'
-        // },
         })}>
       Поиск
       </Button>
