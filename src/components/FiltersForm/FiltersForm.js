@@ -16,6 +16,37 @@ const FiltersForm = () => {
   const [buttonResetDisabled, setButtonResetDisabled] = useState(true);
   const [buttonApplyDisabled, setButtonApplyDisabled] = useState(true);
 
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+
+  const [isActiveNumberInputFrom, setIsActiveNumberInputFrom] = useState(false);
+
+  const [isActiveNumberInputTo, setIsActiveNumberInputTo] = useState(false);
+
+  const handleNumberInputFromFocus = () => {
+    console.log('onFocus');
+    setIsActiveNumberInputFrom(true);
+  };
+
+  const handleNumberInputFromBlur = () => {
+    setIsActiveNumberInputFrom(false);
+  };
+
+  const handleNumberInputToFocus = () => {
+    setIsActiveNumberInputTo(true);
+  };
+
+  const handleNumberInputToBlur = () => {
+    setIsActiveNumberInputTo(false);
+  };
+
+  const handleButtonHover = () => {
+    setIsButtonHovered(true);
+  };
+
+  const handleButtonLeave = () => {
+    setIsButtonHovered(false);
+  };
+
   const handleSelectOpen = () => {
     setSelectOpened(true);
   };
@@ -51,10 +82,14 @@ const FiltersForm = () => {
       <div className="filters">
         <h2>Фильтры</h2>
         <Button
+         onMouseEnter={!buttonResetDisabled ? handleButtonHover : null}
+         onMouseLeave={!buttonResetDisabled ? handleButtonLeave : null} 
         className="reset"
           rightIcon={
             buttonResetDisabled ? (
               <img src="img/Cross_gray.svg" />
+            ) : isButtonHovered ? (
+              <img src="img/Cross_blue.svg" />
             ) : (
               <img src="img/Cross_light_blue.svg" />
             )
@@ -149,16 +184,38 @@ const FiltersForm = () => {
           value={valueSalaryFrom}
           onChange={handleValueSalaryFromChange}
           handlersRef={handlersFrom}
+          onFocus={handleNumberInputFromFocus}
+          onBlur={handleNumberInputFromBlur}
           rightSection={
             <>
               <img
+               onMouseEnter={isActiveNumberInputFrom ? handleButtonHover : null}
+               onMouseLeave={isActiveNumberInputFrom ? handleButtonLeave : null} 
                 className="arrow-up"
-                src="img/Arrow_up_gray.svg"
+                src={
+                  !isActiveNumberInputFrom ? (
+                    "img/Arrow_up_gray.svg"
+                  ) : isButtonHovered ? (
+                    "img/Arrow_up_blue.svg"
+                  ) : (
+                    "img/Arrow_up_light_blue.svg"
+                  )
+                }
                 onClick={() => handlersFrom.current.increment()}
               />
               <img
+              onMouseEnter={isActiveNumberInputFrom ? handleButtonHover : null}
+              onMouseLeave={isActiveNumberInputFrom ? handleButtonLeave : null} 
                 className="arrow-down"
-                src="img/Arrow_down_gray.svg"
+                src={
+                  !isActiveNumberInputFrom ? (
+                    "img/Arrow_down_gray.svg"
+                  ) : isButtonHovered ? (
+                    "img/Arrow_down_blue.svg"
+                  ) : (
+                    "img/Arrow_down_light_blue.svg"
+                  )
+                }
                 onClick={() => handlersFrom.current.decrement()}
               />
             </>
@@ -188,16 +245,18 @@ const FiltersForm = () => {
           value={valueSalaryTo}
           onChange={handleValueSalaryToChange}
           handlersRef={handlersTo}
+          onFocus={handleNumberInputToFocus}
+          onBlur={handleNumberInputToBlur}
           rightSection={
             <>
               <img
                 className="arrow-up"
-                src="img/Arrow_up_gray.svg"
+                src={isActiveNumberInputTo ? "img/Arrow_up_light_blue.svg" : "img/Arrow_up_gray.svg"}
                 onClick={() => handlersTo.current.increment()}
               />
               <img
                 className="arrow-down"
-                src="img/Arrow_down_gray.svg"
+                src={isActiveNumberInputTo ? "img/Arrow_down_light_blue.svg" : "img/Arrow_down_gray.svg"}
                 onClick={() => handlersTo.current.decrement()}
               />
             </>

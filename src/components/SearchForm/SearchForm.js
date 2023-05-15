@@ -30,7 +30,8 @@ const SearchForm = () => {
 
         <Button
         onMouseEnter={inputValue ? handleButtonHover : null}
-        onMouseLeave={inputValue ? handleButtonLeave : null}        disabled ={!inputValue}
+        onMouseLeave={inputValue ? handleButtonLeave : null}        
+        disabled ={!inputValue}
           sx={{ '&[data-disabled]': { background: '#92C1FF', color: '#FFFFFF', fontFamily: 'Inter', fontWeight: '500', fontSize: '14px', lineHeight: '21px', borderRadius: '8px' } }}
       styles={(theme) => ({
         root: {
