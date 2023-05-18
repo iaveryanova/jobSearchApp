@@ -5,18 +5,24 @@ const NavBar = () => {
   return (
     <nav>
       <div className="logo">
-        <img src="img/Union.svg" alt="" className="logo-image"></img>
+        <NavLink to="/">
+          <img src="/img/Union.svg" alt="" className="logo-image"></img>
+        </NavLink>
         <div className="logo-name">
           <p>Jobored</p>
         </div>
       </div>
       <ul>
         <li>
-          <NavLink to="/">Поиск вакансий</NavLink>
+          <NavLink to="/" className={({ isActive }) => isActive? "active": ''}>
+            Поиск вакансий
+          </NavLink>
         </li>
 
         <li>
-          <NavLink to="/favorites">Избранное</NavLink>
+          <NavLink to="/favorites" className={({ isActive }) => isActive? "active": ''}>
+            Избранное
+          </NavLink>
         </li>
       </ul>
     </nav>

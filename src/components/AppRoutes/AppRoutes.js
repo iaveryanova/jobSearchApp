@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Favorites from '../../pages/ Favorites/Favorites'
 import Home from '../../pages/Home/Home'
+import VacancyPage from '../VacancyPage/VacancyPage'
 
 
 const AppRoutes = () => {
@@ -8,6 +9,7 @@ const AppRoutes = () => {
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/vacancy/:id" element={<VacancyPage />} />
       </Routes>
       
     )

@@ -30,6 +30,37 @@
     color: #ACADB9;
 }
 
-.btn-search:hover {
-    background: #3B7CD3;
+.btn-search {
+    width: 83px;
+    height: 32px;
+    background: #5E96FC;
+    color: #FFFFFF;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    border-radius: 8px;
+    text-align: center;
+    border: none;
+    padding: 4px 20px;
+
+    .mantine-Button-inner {
+        width:43px;
+    }
 }
+
+.btn-search[data-disabled] {
+    background: #92C1FF;
+    color: #FFFFFF;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    border-radius: 8px;
+}
+
+.btn-search:hover {
+    background: #3b7cd3;
+}
+
+

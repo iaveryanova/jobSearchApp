@@ -1,32 +1,73 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import "./FiltersForm.css";
 import { Select } from "@mantine/core";
 import { Button } from "@mantine/core";
 import { NumberInput } from "@mantine/core";
+import http from "../../http";
+import { SearchContext } from '../../pages/Home/Home';
 
-const FiltersForm = () => {
+const FiltersForm = ({getVacancies}) => {
+  const [categories, setCategories] = useState([]);
+
+  const getCatalogues = async () => {
+    let categoriesData = await http.get("/catalogues/");
+
+    let outputCategories = categoriesData.data.map((item) => {
+      return {
+        value: item.key,
+        label: item.title,
+      };
+    });
+    setCategories(outputCategories);
+  };
+
+  useEffect(() => {
+    getCatalogues();
+  }, []);
+
   const [selectOpened, setSelectOpened] = useState(false);
+  const handleSelectOpen = () => {
+    setSelectOpened(true);
+  };
+  const handleSelectClose = () => {
+    setSelectOpened(false);
+  };
+
+  const context = useContext(SearchContext);
+
   const [searchValue, onSearchChange] = useState("");
-  const [selectedIndustryValue, setSelectedIndustryValue] = useState("");
-  const [valueSalaryFrom, setValueSalaryFrom] = useState("");
-  const [valueSalaryTo, setValueSalaryTo] = useState("");
   const handlersFrom = useRef();
   const handlersTo = useRef();
 
   const [buttonResetDisabled, setButtonResetDisabled] = useState(true);
   const [buttonApplyDisabled, setButtonApplyDisabled] = useState(true);
-
-  const [isButtonHovered, setIsButtonHovered] = useState(false);
-
-  const [isActiveNumberInputFrom, setIsActiveNumberInputFrom] = useState(false);
-
-  const [isActiveNumberInputTo, setIsActiveNumberInputTo] = useState(false);
-
-  const handleNumberInputFromFocus = () => {
-    console.log('onFocus');
-    setIsActiveNumberInputFrom(true);
+  const handleSelectChange = (value) => {
+    context.setSelectedIndustryValue(value);
+    setButtonApplyDisabled(value === "" || value === null);
+    setButtonResetDisabled(
+      (value === "" || value === null) &&
+        context.valueSalaryTo === "" &&
+        context.valueSalaryFrom === ""
+    );
+  };
+  const handleValueSalaryFromChange = (value) => {
+    context.setValueSalaryFrom(value);
+    setButtonResetDisabled(
+      context.selectedIndustryValue === "" && context.valueSalaryTo === "" && value === ""
+    );
+  };
+  const handleValueSalaryToChange = (value) => {
+    context.setValueSalaryTo(value);
+    setButtonResetDisabled(
+      context.selectedIndustryValue === "" && value === "" && context.valueSalaryFrom === ""
+    );
   };
 
+  const [isActiveNumberInputFrom, setIsActiveNumberInputFrom] = useState(false);
+  const [isActiveNumberInputTo, setIsActiveNumberInputTo] = useState(false);
+  const handleNumberInputFromFocus = () => {
+    setIsActiveNumberInputFrom(true);
+  };
   const handleNumberInputFromBlur = () => {
     setIsActiveNumberInputFrom(false);
   };
@@ -39,96 +80,55 @@ const FiltersForm = () => {
     setIsActiveNumberInputTo(false);
   };
 
-  const handleButtonHover = () => {
-    setIsButtonHovered(true);
+  const reset = () => {
+    context.setSelectedIndustryValue("");
+    context.setValueSalaryFrom("");
+    context.setValueSalaryTo("");
+    setButtonResetDisabled(true);
+    setButtonApplyDisabled(true);
   };
 
-  const handleButtonLeave = () => {
-    setIsButtonHovered(false);
-  };
-
-  const handleSelectOpen = () => {
-    setSelectOpened(true);
-  };
-
-  const handleSelectClose = () => {
-    setSelectOpened(false);
-  };
-
-  const handleSelectChange = (value) => {
-    setSelectedIndustryValue(value);
-    setButtonApplyDisabled(value === "" || value === null);
-    setButtonResetDisabled(
-      (value === "" || value === null) && valueSalaryTo === "" && valueSalaryFrom === ""
-    );
-  };
-
-  const handleValueSalaryFromChange = (value) => {
-    setValueSalaryFrom(value);
-    setButtonResetDisabled(
-      selectedIndustryValue === "" && valueSalaryTo === "" && value === ""
-    );
-  };
-
-  const handleValueSalaryToChange = (value) => {
-    setValueSalaryTo(value);
-    setButtonResetDisabled(
-      selectedIndustryValue === "" && value === "" && valueSalaryFrom === ""
-    );
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    getVacancies(context.inputValue, context.valueSalaryFrom, context.valueSalaryTo, context.selectedIndustryValue);
+    console.log(context.inputValue, context.selectedIndustryValue, context.valueSalaryFrom, context.valueSalaryTo);
   };
 
   return (
-    <form className="filters-form">
+    <form className="filters-form" onSubmit={onFormSubmit}>
       <div className="filters">
         <h2>Фильтры</h2>
         <Button
-         onMouseEnter={!buttonResetDisabled ? handleButtonHover : null}
-         onMouseLeave={!buttonResetDisabled ? handleButtonLeave : null} 
-        className="reset"
+          className="reset"
           rightIcon={
-            buttonResetDisabled ? (
-              <img src="img/Cross_gray.svg" />
-            ) : isButtonHovered ? (
-              <img src="img/Cross_blue.svg" />
-            ) : (
-              <img src="img/Cross_light_blue.svg" />
-            )
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="11.7425"
+                y1="4.44219"
+                x2="4.44197"
+                y2="11.7427"
+                stroke="#ACADB9"
+                strokeWidth="1.25"
+              />
+              <line
+                x1="11.9013"
+                y1="11.7425"
+                x2="4.60082"
+                y2="4.44197"
+                stroke="#ACADB9"
+                strokeWidth="1.25"
+              />
+            </svg>
           }
           variant="white"
           disabled={buttonResetDisabled}
-          sx={{
-            "&[data-disabled]": {
-              background: "#ffff",
-              color: "#ACADB9",
-              fontFamily: "Inter",
-              fontWeight: "500",
-              fontSize: "14px",
-              lineHeight: "20px",
-            },
-          }}
-          styles={(theme) => ({
-            root: {
-              border: "none",
-              boxSizing: "border-box",
-              width: "115px",
-              height: "20px",
-              fontFamily: "Inter",
-              fontStyle: "normal",
-              fontWeight: "500",
-              fontSize: "14px",
-              lineHeight: "20px",
-              padding: "0px",
-              color: "#92C1FF",
-            },
-            rightIcon: {
-              margin: "0px",
-            },
-            inner: {
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            },
-          })}
+          onClick={reset}
         >
           Сбросить все
         </Button>
@@ -136,7 +136,8 @@ const FiltersForm = () => {
       <div className="industry">
         <h3>Отрасль</h3>
         <Select
-          value={selectedIndustryValue}
+          className="industry-select"
+          value={context.selectedIndustryValue}
           onChange={handleSelectChange}
           searchable
           clearable
@@ -145,35 +146,14 @@ const FiltersForm = () => {
           nothingFound="Не найдено"
           rightSection={
             <img
-              src={selectOpened ? "img/Arrow_up.svg" : "img/Arrow_down.svg"}
+              src={selectOpened ? "/img/Arrow_up.svg" : "/img/Arrow_down.svg"}
               onClick={() => {
                 setSelectOpened(!selectOpened);
               }}
             />
           }
-          styles={(theme) => ({
-            input: {
-              width: "275px",
-              height: "42px",
-              fontFamily: "Inter",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "20px",
-              border: "1px solid #D5D6DC",
-              borderRadius: "8px",
-            },
-            rightSection: {
-              pointerEvents: "none",
-            },
-          })}
           placeholder="Выберете отрасль"
-          data={[
-            { value: "1", label: "IT, интернет, связь, телеком" },
-            { value: "2", label: "Кадры, управление персоналом" },
-            { value: "3", label: "Искусство, культура, развлечения" },
-            { value: "4", label: "Банки, инвестиции, лизинг" },
-            { value: "5", label: "Дизайн" },
-          ]}
+          data={categories}
           onDropdownOpen={handleSelectOpen}
           onDropdownClose={handleSelectClose}
         />
@@ -181,127 +161,107 @@ const FiltersForm = () => {
       <div className="salary">
         <h3>Оклад</h3>
         <NumberInput
-          value={valueSalaryFrom}
+          min={0}
+          type="number"
+          className={
+            isActiveNumberInputFrom ? "salary-input-active" : "salary-input"
+          }
+          value={context.valueSalaryFrom}
           onChange={handleValueSalaryFromChange}
           handlersRef={handlersFrom}
           onFocus={handleNumberInputFromFocus}
           onBlur={handleNumberInputFromBlur}
           rightSection={
             <>
-              <img
-               onMouseEnter={isActiveNumberInputFrom ? handleButtonHover : null}
-               onMouseLeave={isActiveNumberInputFrom ? handleButtonLeave : null} 
+              <svg
                 className="arrow-up"
-                src={
-                  !isActiveNumberInputFrom ? (
-                    "img/Arrow_up_gray.svg"
-                  ) : isButtonHovered ? (
-                    "img/Arrow_up_blue.svg"
-                  ) : (
-                    "img/Arrow_up_light_blue.svg"
-                  )
-                }
                 onClick={() => handlersFrom.current.increment()}
-              />
-              <img
-              onMouseEnter={isActiveNumberInputFrom ? handleButtonHover : null}
-              onMouseLeave={isActiveNumberInputFrom ? handleButtonLeave : null} 
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.50006 4.5L5.39054 1.83469C5.16584 1.6421 4.83428 1.6421 4.60959 1.83469L1.50006 4.5"
+                  stroke="#ACADB9"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <svg
                 className="arrow-down"
-                src={
-                  !isActiveNumberInputFrom ? (
-                    "img/Arrow_down_gray.svg"
-                  ) : isButtonHovered ? (
-                    "img/Arrow_down_blue.svg"
-                  ) : (
-                    "img/Arrow_down_light_blue.svg"
-                  )
-                }
                 onClick={() => handlersFrom.current.decrement()}
-              />
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.49994 1.5L4.60946 4.16531C4.83416 4.3579 5.16572 4.3579 5.39041 4.16531L8.49994 1.5"
+                  stroke="#ACADB9"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
             </>
           }
-          styles={(theme) => ({
-            input: {
-              width: "275px",
-              height: "42px",
-              fontFamily: "Inter",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "20px",
-              border: "1px solid #D5D6DC",
-              borderRadius: "8px",
-            },
-            rightSection: {
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "2.25rem",
-            },
-          })}
           placeholder="От"
         />
 
         <NumberInput
-          value={valueSalaryTo}
+          min={context.valueSalaryFrom}
+          type="number"
+          className={
+            isActiveNumberInputTo ? "salary-input-active" : "salary-input"
+          }
+          value={context.valueSalaryTo}
           onChange={handleValueSalaryToChange}
           handlersRef={handlersTo}
           onFocus={handleNumberInputToFocus}
           onBlur={handleNumberInputToBlur}
           rightSection={
             <>
-              <img
+              <svg
                 className="arrow-up"
-                src={isActiveNumberInputTo ? "img/Arrow_up_light_blue.svg" : "img/Arrow_up_gray.svg"}
                 onClick={() => handlersTo.current.increment()}
-              />
-              <img
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.50006 4.5L5.39054 1.83469C5.16584 1.6421 4.83428 1.6421 4.60959 1.83469L1.50006 4.5"
+                  stroke="#ACADB9"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <svg
                 className="arrow-down"
-                src={isActiveNumberInputTo ? "img/Arrow_down_light_blue.svg" : "img/Arrow_down_gray.svg"}
                 onClick={() => handlersTo.current.decrement()}
-              />
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.49994 1.5L4.60946 4.16531C4.83416 4.3579 5.16572 4.3579 5.39041 4.16531L8.49994 1.5"
+                  stroke="#ACADB9"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
             </>
           }
-          styles={(theme) => ({
-            input: {
-              width: "275px",
-              height: "42px",
-              fontFamily: "Inter",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "20px",
-              border: "1px solid #D5D6DC",
-              borderRadius: "8px",
-            },
-            rightSection: {
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "2.25rem",
-            },
-          })}
           placeholder="До"
         />
       </div>
 
-      <Button
-      className="apply"
-        disabled={buttonApplyDisabled}
-          sx={{ '&[data-disabled]': { background: '#92C1FF', color: '#FFFFFF', fontFamily: 'Inter', fontWeight: '500', fontSize: '14px', lineHeight: '21px', borderRadius: '8px' } }}
-        styles={(theme) => ({
-          root: {
-            width: "275px",
-            height: "40px",
-            background: "#5E96FC",
-            borderRadius: "8px",
-            fontFamily: "Inter",
-            fontWeight: "500",
-            fontSize: "14px",
-            lineHeight: "21px",
-            textAlign: "center",
-            color: "#FFFFFF",
-          },
-        })}
-      >
+      <Button className="apply" disabled={buttonApplyDisabled} type="submit">
         Применить
       </Button>
     </form>
