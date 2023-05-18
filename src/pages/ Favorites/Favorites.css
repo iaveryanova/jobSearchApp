@@ -1,3 +1,48 @@
 .favorites-page {
-    padding: 0 162px;
+    padding: 120px 162px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.man {
+    width: 241px;
+    height: 231px;
+    background-image: url('/public/img/Man.svg');
+}
+
+.text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    color: #343A40;
+    margin-top: 32px;
+}
+
+.search-vacancies {
+    padding: 10px 24px;
+    width: 164px;
+    height: 42px;
+    background: #DEECFF;
+    border-radius: 8px;
+    color: #3B7CD3;
+    margin-top: 32px;
+
+    .mantine-Button-label {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 155%;
+    }
+}
+
+.search-vacancies:hover {
+    background: #5E96FC;
+    color: #fff;
 }

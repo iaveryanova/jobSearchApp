@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./SearchForm.css";
 import { Button } from "@mantine/core";
 import { SearchContext } from "../../pages/Home/Home";

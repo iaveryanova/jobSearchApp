@@ -147,6 +147,7 @@ const FiltersForm = ({getVacancies}) => {
           rightSection={
             <img
               src={selectOpened ? "/img/Arrow_up.svg" : "/img/Arrow_down.svg"}
+              alt=""
               onClick={() => {
                 setSelectOpened(!selectOpened);
               }}
