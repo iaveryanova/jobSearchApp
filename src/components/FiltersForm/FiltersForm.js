@@ -55,11 +55,17 @@ const FiltersForm = ({getVacancies}) => {
     setButtonResetDisabled(
       context.selectedIndustryValue === "" && context.valueSalaryTo === "" && value === ""
     );
+    setButtonApplyDisabled(
+      context.selectedIndustryValue === "" && context.valueSalaryTo === "" && value === ""
+    );
   };
   const handleValueSalaryToChange = (value) => {
     context.setValueSalaryTo(value);
     setButtonResetDisabled(
       context.selectedIndustryValue === "" && value === "" && context.valueSalaryFrom === ""
+    );
+    setButtonApplyDisabled(
+      context.selectedIndustryValue === "" && context.valueSalaryTo === "" && value === ""
     );
   };
 

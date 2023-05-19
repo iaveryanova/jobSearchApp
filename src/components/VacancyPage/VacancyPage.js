@@ -13,7 +13,8 @@ const VacancyPage = () => {
   let [salary, setSalary] = useState("");
   let [schedule, setSchedule] = useState("");
   let [location, setLocation] = useState("");
-  let [informationForCandidate, setInformationForCandidate] = useState("")
+  let [informationForCandidate, setInformationForCandidate] = useState("");
+  let [idVacancy, setIdVacancy] = useState("");
 
   const getVacancy = async () => {
     let vacancyData = await http.get(`/vacancies/${id}`, {
@@ -21,13 +22,14 @@ const VacancyPage = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    
-    console.log(vacancyData.data)
+
+    console.log(vacancyData.data);
     setInformationForCandidate(vacancyData.data.vacancyRichText);
     setProfession(vacancyData.data.profession);
     setSalary(vacancyData.data.payment_from);
     setSchedule(vacancyData.data.type_of_work.title);
     setLocation(vacancyData.data.town.title);
+    setIdVacancy(vacancyData.data.id);
   };
 
   useEffect(() => {
@@ -38,23 +40,23 @@ const VacancyPage = () => {
     <div className="vacancy-page">
       {profession ? (
         <>
-         <VacancyCard
-          className="vacancy-page-card"
-          id={id}
-          profession={profession}
-          salary={salary}
-          schedule={schedule}
-          location={location}
-        />
-        
-        <div className="i                 " dangerouslySetInnerHTML={{ __html: informationForCandidate }}></div>
+          <VacancyCard
+            className="vacancy-page-card"
+            id={idVacancy}
+            profession={profession}
+            salary={salary}
+            schedule={schedule}
+            location={location}
+          />
+
+          <div
+            className="info-candidate"
+            dangerouslySetInnerHTML={{ __html: informationForCandidate }}
+          ></div>
         </>
-       
       ) : (
         <Loader className="loader" />
       )}
-
-
     </div>
   );
 };
