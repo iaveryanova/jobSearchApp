@@ -5,19 +5,31 @@ import FiltersForm from "../../components/FiltersForm/FiltersForm";
 import VacancyCard from "../../components/VacancyCard/VacancyCard";
 import { Pagination } from "@mantine/core";
 import http from "../../http";
+import { Loader } from "@mantine/core";
 
 export const SearchContext = React.createContext(null);
 
 const Home = () => {
   const [vacancies, setVacancies] = useState([]);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
-  const getVacancies = async (keyword='', payment_from='', payment_to='', catalogues='') => {
-    let vacanciesData = await http.get(`/vacancies/?published=1&no_agreement=1&count=500&catalogues=${catalogues}&keyword=${keyword}&payment_from=${payment_from}&payment_to=${payment_to}`, 
-    {headers:{
-      'Authorization': `Bearer ${token}`
-  }});
+  const getVacancies = async (
+    keyword = "",
+    payment_from = "",
+    payment_to = "",
+    catalogues = "",
+    page = 1
+  ) => {
+    let vacanciesData = await http.get(
+      `/vacancies/?published=1&no_agreement=1&count=500&page=${page}&catalogues=${catalogues}&keyword=${keyword}&payment_from=${payment_from}&payment_to=${payment_to}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setCurrentPage(page);
 
     let outputVacancies = vacanciesData.data.objects.map((item) => {
       return {
@@ -36,6 +48,8 @@ const Home = () => {
     getVacancies();
   }, []);
 
+  // const [activePage, setPage] = useState(1);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
@@ -48,24 +62,51 @@ const Home = () => {
   const [valueSalaryTo, setValueSalaryTo] = useState("");
   const [inputValue, setInputValue] = useState("");
 
-  return (
-    <SearchContext.Provider value={ {selectedIndustryValue:selectedIndustryValue, setSelectedIndustryValue:setSelectedIndustryValue, valueSalaryFrom:valueSalaryFrom, setValueSalaryFrom:setValueSalaryFrom, valueSalaryTo:valueSalaryTo, setValueSalaryTo:setValueSalaryTo, inputValue:inputValue, setInputValue:setInputValue } } >
-      <div className="search-page">
-        <FiltersForm getVacancies={getVacancies}/>
-        <div className="vacancies">
-          <SearchForm getVacancies={getVacancies}/>
+  const changePage = (value) => {
+    getVacancies(
+      inputValue,
+      valueSalaryFrom,
+      valueSalaryTo,
+      selectedIndustryValue,
+      value
+    );
+    console.log("change", value);
+  };
 
-          {currentItems.map((item) => {
-            const { id, ...itemProps } = item;
-            return <VacancyCard key={id} id={id} {...itemProps} />;
-          })}
+  return (
+    <SearchContext.Provider
+      value={{
+        selectedIndustryValue: selectedIndustryValue,
+        setSelectedIndustryValue: setSelectedIndustryValue,
+        valueSalaryFrom: valueSalaryFrom,
+        setValueSalaryFrom: setValueSalaryFrom,
+        valueSalaryTo: valueSalaryTo,
+        setValueSalaryTo: setValueSalaryTo,
+        inputValue: inputValue,
+        setInputValue: setInputValue,
+      }}
+    >
+      <div className="search-page">
+        <FiltersForm getVacancies={getVacancies} />
+        <div className="vacancies">
+          <SearchForm getVacancies={getVacancies} />
+
+          {currentItems.length ? (
+            currentItems.map((item) => {
+              const { id, ...itemProps } = item;
+              return <VacancyCard key={id} id={id} {...itemProps} />;
+            })
+            
+          ) : (
+            <Loader className="loader"/>
+          )}
 
           <Pagination
+            value={currentPage}
             position="center"
             className="pagination"
             total={Math.ceil(vacancies.length / itemsPerPage)}
-            page={currentPage}
-            onChange={setCurrentPage}
+            onChange={changePage}
             styles={(theme) => ({
               control: {
                 "&[data-active]": {

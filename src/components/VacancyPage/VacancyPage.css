@@ -1,0 +1,70 @@
+.vacancy-page {
+  width: 773px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+
+  .vacancy-card {
+    padding: 24px 25px 24px 24px;
+
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .vacancy-title {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    color: #232134;
+
+    padding-right: 20px;
+  }
+
+  .vacancy-salary {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: #232134;
+  }
+
+  .vacancy-details {
+    margin-top: 16.5px;
+    margin-bottom: 16.5px;
+  }
+
+  .vacancy-details img {
+    margin: 0 12px;
+  }
+
+  .vacancy-schedule {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    color: #232134;
+  }
+
+  .vacancy-location {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #232134;
+  }
+
+  .vacancy-location img {
+    margin-right: 11.33px;
+  }
+}
+
+.info-candidate {
+    padding: 24px;
+    background: #FFFFFF;
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;  
+    color: #232134;
+}

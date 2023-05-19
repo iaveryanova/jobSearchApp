@@ -17,6 +17,7 @@ const VacancyCard = ({id, profession, salary, schedule, location}) => {
         <div className="title">
             <NavLink to={"/vacancy/" + id} className="vacancy-title">{profession}</NavLink>
             <Button 
+            classNames="star"
             onClick={() => setIsClicked(!isClicked)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

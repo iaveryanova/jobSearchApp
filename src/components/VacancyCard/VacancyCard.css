@@ -1,7 +1,6 @@
 .vacancy-card {
     background: #FFFFFF;
     width: 100%;
-    height: 137px;
     border: 1px solid #EAEBED;
     border-radius: 12px;
     margin-top: 16px;
@@ -29,6 +28,7 @@
     font-size: 20px;
     line-height: 24px;
     color: #5E96FC;
+    padding-right: 20px;
 }
 
 .vacancy-details {
@@ -72,7 +72,3 @@
 .vacancy-location img{
     margin-right: 11.33px
 }
-
-/* .star:hover {
-    stroke: red;
-} */
