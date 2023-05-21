@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./VacancyCard.css";
+import "./VacancyCard.scss";
 import { NavLink } from "react-router-dom";
 import { Button } from "@mantine/core";
 import { useParams } from "react-router-dom";

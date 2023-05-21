@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import http from "../../http";
 import VacancyCard from "../VacancyCard/VacancyCard";
-import "./VacancyPage.css";
+import "./VacancyPage.scss";
 import { Loader } from "@mantine/core";
 
 const VacancyPage = () => {

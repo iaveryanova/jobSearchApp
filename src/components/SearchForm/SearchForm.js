@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./SearchForm.css";
+import "./SearchForm.scss";
 import { Button } from "@mantine/core";
 import { SearchContext } from "../../pages/Home/Home";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
+import "./Home.scss";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import FiltersForm from "../../components/FiltersForm/FiltersForm";
 import VacancyCard from "../../components/VacancyCard/VacancyCard";
@@ -128,33 +128,25 @@ const Home = () => {
           <SearchForm getVacancies={getVacancies} />
 
           {totalVacancies > 0 ? (
-              currentItems.map((item) => {
-                const { id, ...itemProps } = item;
-                return <VacancyCard key={id} id={id} {...itemProps} />;
-              })
-            ) : totalVacancies == 0 ? (
-              <NotFound />
-            ) : (
-              <Loader className="loader" />
-            )
-          }
+            currentItems.map((item) => {
+              const { id, ...itemProps } = item;
+              return <VacancyCard key={id} id={id} {...itemProps} />;
+            })
+          ) : totalVacancies == 0 ? (
+            <NotFound />
+          ) : (
+            <Loader className="loader" />
+          )}
 
-          <Pagination
-            value={currentPage}
-            position="center"
-            className="pagination"
-            total={Math.ceil(totalVacancies / itemsPerPage)}
-            onChange={changePage}
-            styles={(theme) => ({
-              control: {
-                "&[data-active]": {
-                  background: "#5E96FC",
-                  border: "1px solid #5E96FC",
-                  borderRadius: "4px",
-                },
-              },
-            })}
-          />
+          {totalVacancies > 4 && (
+            <Pagination
+              value={currentPage}
+              position="center"
+              className="pagination"
+              total={Math.ceil(totalVacancies / itemsPerPage)}
+              onChange={changePage}
+            />
+          )}
         </div>
       </div>
     </SearchContext.Provider>

@@ -12,6 +12,12 @@
     margin-top:40px;
 }
 
+.mantine-Pagination-control[data-active] {
+    background: #5E96FC;
+    border: 1px solid #5E96FC;
+    borderRadius: 4px;
+}
+
 .loader {
     display: block;
     margin: 0 auto;

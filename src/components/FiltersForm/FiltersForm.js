@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import "./FiltersForm.css";
+import "./FiltersForm.scss";
 import { Select } from "@mantine/core";
 import { Button } from "@mantine/core";
 import { NumberInput } from "@mantine/core";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Favorites.css";
+import "./Favorites.scss";
 import { Button, Loader, Pagination } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import http from "../../http";
@@ -96,7 +96,6 @@ const Favorites = () => {
           <div className="loading">
             <Loader />
           </div>
-          
         )
       ) : (
         <>
@@ -107,22 +106,15 @@ const Favorites = () => {
         </>
       )}
 
-      <Pagination
-        value={currentPage}
-        position="center"
-        className="pagination"
-        total={Math.ceil(totalVacancies / itemsPerPage)}
-        onChange={changePage}
-        styles={(theme) => ({
-          control: {
-            "&[data-active]": {
-              background: "#5E96FC",
-              border: "1px solid #5E96FC",
-              borderRadius: "4px",
-            },
-          },
-        })}
-      />
+      {totalVacancies > 4 && (
+        <Pagination
+          value={currentPage}
+          position="center"
+          className="pagination"
+          total={Math.ceil(totalVacancies / itemsPerPage)}
+          onChange={changePage}
+        />
+      )}
     </div>
   );
 };
