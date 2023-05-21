@@ -68,3 +68,30 @@
     line-height: 140%;  
     color: #232134;
 }
+
+.info-candidate p, .info-candidate #text, .info-candidate li {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #232134;
+}
+
+.info-candidate b{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  color: #232134;
+}
+
+.info-candidate li {
+  margin-left: 15px;
+}
+
+.info-candidate ul {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}

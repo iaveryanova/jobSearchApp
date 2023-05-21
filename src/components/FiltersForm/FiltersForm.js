@@ -182,7 +182,10 @@ const FiltersForm = ({getVacancies}) => {
             <>
               <svg
                 className="arrow-up"
-                onClick={() => handlersFrom.current.increment()}
+                onClick={() => {
+                  handlersFrom.current.increment()
+                  setIsActiveNumberInputFrom(true);
+                }}
                 width="10"
                 height="6"
                 viewBox="0 0 10 6"
@@ -198,7 +201,10 @@ const FiltersForm = ({getVacancies}) => {
               </svg>
               <svg
                 className="arrow-down"
-                onClick={() => handlersFrom.current.decrement()}
+                onClick={() => {
+                  handlersFrom.current.decrement();
+                  setIsActiveNumberInputFrom(true);
+                }}
                 width="10"
                 height="6"
                 viewBox="0 0 10 6"

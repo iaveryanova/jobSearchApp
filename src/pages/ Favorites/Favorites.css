@@ -1,27 +1,13 @@
 .favorites-page {
-    padding: 120px 162px;
     display:flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    margin: 0 auto;
 }
 
-.man {
-    width: 241px;
-    height: 231px;
-    background-image: url('/public/img/Man.svg');
-}
-
-.text {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    display: flex;
-    align-items: center;
-    color: #343A40;
-    margin-top: 32px;
+.favorite-vacancies {
+    width: 773px;
+    margin-top: 24px;
 }
 
 .search-vacancies {
@@ -45,4 +31,9 @@
 .search-vacancies:hover {
     background: #5E96FC;
     color: #fff;
+}
+
+
+.loading {
+    margin-top: 60px;
 }
