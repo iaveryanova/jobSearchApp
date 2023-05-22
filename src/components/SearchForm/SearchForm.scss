@@ -63,4 +63,20 @@
     background: #3b7cd3;
 }
 
+@media (max-width: 860px) {
+    .search{
+        margin-bottom: 20px;
+    }
+}
 
+@media (max-width: 420px) {
+    .input-search::placeholder {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 350px) {
+    .input-search::placeholder {
+        font-size: 10px;
+    }
+}

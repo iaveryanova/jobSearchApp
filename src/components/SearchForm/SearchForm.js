@@ -17,17 +17,12 @@ const SearchForm = ({ getVacancies }) => {
       context.valueSalaryTo,
       context.selectedIndustryValue
     );
-    console.log(
-      context.inputValue,
-      context.selectedIndustryValue,
-      context.valueSalaryFrom,
-      context.valueSalaryTo
-    );
   };
   return (
     <div className="search">
       <img src="/img/Search.svg" alt=""></img>
       <input
+        data-elem="search-input"
         type="text"
         className="input-search"
         placeholder="Введите название вакансии"
@@ -36,6 +31,7 @@ const SearchForm = ({ getVacancies }) => {
       />
 
       <Button
+        data-elem="search-button"
         className="btn-search"
         onClick={searchVacancies}
         disabled={!context.inputValue}

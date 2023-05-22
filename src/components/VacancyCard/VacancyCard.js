@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 const VacancyCard = ({
   id,
   profession,
-  salary,
+  salaryFrom,
+  salaryTo,
   schedule,
   location,
   removeCallback = (id) => {},
@@ -42,14 +43,17 @@ const VacancyCard = ({
   };
 
   return (
-    <div className="vacancy-card">
+    <div 
+    data-elem={"vacancy-" + id}
+    className="vacancy-card">
       <div className="vacancy-data">
         <div className="title">
           <NavLink to={"/vacancy/" + id} className="vacancy-title">
             {profession}
           </NavLink>
           <Button
-            classNames="star"
+            data-elem={"vacancy-" + id + "-shortlist-button"}
+            className="star"
             onClick={toggleFavorite}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -62,30 +66,21 @@ const VacancyCard = ({
                     ? "/img/Star_blue.svg"
                     : "/img/Star.svg"
                 }
-                className="star"
               />
             }
             variant="white"
-            styles={(theme) => ({
-              inner: {
-                width: "22px",
-                height: "20px",
-              },
-              root: {
-                padding: "0px",
-                border: "0px",
-                height: "20px",
-              },
-              leftIcon: {
-                marginRight: "0px",
-              },
-            })}
-            className="favorites"
           ></Button>
         </div>
 
         <div className="vacancy-details">
-          <p className="vacancy-salary">з/п от {salary} rub</p>
+          <p className="vacancy-salary">
+            з/п
+            {(salaryTo !== 0 && salaryFrom !== 0) ?
+              (<> {salaryFrom} - {salaryTo} </>) : 
+              salaryTo === 0 ? (<> от {salaryFrom} </>) : (<> {salaryTo} </>)
+            }
+            rub
+          </p>
           <img src="/img/Delimiter.svg"></img>
           <p className="vacancy-schedule">{schedule}</p>
         </div>

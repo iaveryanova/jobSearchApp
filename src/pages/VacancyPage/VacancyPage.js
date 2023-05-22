@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import http from "../../http";
-import VacancyCard from "../VacancyCard/VacancyCard";
+import VacancyCard from "../../components/VacancyCard/VacancyCard";
 import "./VacancyPage.scss";
 import { Loader } from "@mantine/core";
 
@@ -10,7 +10,8 @@ const VacancyPage = () => {
   let { id } = useParams();
 
   let [profession, setProfession] = useState("");
-  let [salary, setSalary] = useState("");
+  let [salaryFrom, setSalaryFrom] = useState("");
+  let [salaryTo, setSalaryTo] = useState("");
   let [schedule, setSchedule] = useState("");
   let [location, setLocation] = useState("");
   let [informationForCandidate, setInformationForCandidate] = useState("");
@@ -23,10 +24,10 @@ const VacancyPage = () => {
       },
     });
 
-    console.log(vacancyData.data);
     setInformationForCandidate(vacancyData.data.vacancyRichText);
     setProfession(vacancyData.data.profession);
-    setSalary(vacancyData.data.payment_from);
+    setSalaryFrom(vacancyData.data.payment_from);
+    setSalaryTo(vacancyData.data.payment_to);
     setSchedule(vacancyData.data.type_of_work.title);
     setLocation(vacancyData.data.town.title);
     setIdVacancy(vacancyData.data.id);
@@ -44,7 +45,8 @@ const VacancyPage = () => {
             className="vacancy-page-card"
             id={idVacancy}
             profession={profession}
-            salary={salary}
+            salaryFrom={salaryFrom}
+            salaryTo={salaryTo}
             schedule={schedule}
             location={location}
           />

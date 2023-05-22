@@ -1,9 +1,11 @@
 .vacancy-page {
-  width: 773px;
+  width: 100%;
+  max-width: 773px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  padding: 0 40px;
 
   .vacancy-card {
     padding: 24px 25px 24px 24px;
@@ -95,3 +97,39 @@
   margin-bottom: 15px;
   margin-top: 15px;
 }
+
+@media (max-width: 860px) {
+  .vacancy-page {
+    padding-top: 20px;
+    .vacancy-card{
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 580px) {
+
+  .vacancy-page .vacancy-data{
+      .title{
+          position: relative;
+          .vacancy-title{
+              font-size: 22px;
+              line-height: 24px;
+              padding-right: 0;
+              margin-bottom: 10px;
+          }
+          .star.mantine-Button-root{
+              position: absolute;
+              bottom: -105px;
+              right: 0;
+          }
+      }
+  }
+}
+
+@media (max-width: 420px) {
+  .vacancy-page {
+    padding: 20px;
+  }
+}
+

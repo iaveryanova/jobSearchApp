@@ -3,29 +3,39 @@ import "./NavBar.scss";
 
 const NavBar = () => {
   return (
-    <nav>
-      <div className="logo">
-        <NavLink to="/">
-          <img src="/img/Union.svg" alt="" className="logo-image"></img>
-        </NavLink>
-        <div className="logo-name">
-          <p>Jobored</p>
+    <div className="container">
+      <nav>
+        <div className="logo">
+          <NavLink to="/">
+            <img src="/img/Union.svg" alt="" className="logo-image"></img>
+          </NavLink>
+          <NavLink to="/">
+            <div className="logo-name">
+              <p>Jobored</p>
+            </div>
+          </NavLink>
         </div>
-      </div>
-      <ul>
-        <li>
-          <NavLink to="/" className={({ isActive }) => isActive? "active": ''}>
-            Поиск вакансий
-          </NavLink>
-        </li>
+        <ul>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Поиск вакансий
+            </NavLink>
+          </li>
 
-        <li>
-          <NavLink to="/favorites" className={({ isActive }) => isActive? "active": ''}>
-            Избранное
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
+          <li>
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Избранное
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 };
 

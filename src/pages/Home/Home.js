@@ -57,7 +57,8 @@ const Home = () => {
     let outputVacancies = vacanciesData.data.objects.map((item) => {
       return {
         profession: item.profession,
-        salary: item.payment_from,
+        salaryFrom: item.payment_from,
+        salaryTo: item.payment_to,
         schedule: item.type_of_work.title,
         location: item.town.title,
         id: item.id,
@@ -106,7 +107,6 @@ const Home = () => {
       selectedIndustryValue,
       value
     );
-    console.log("change", value);
   };
 
   return (

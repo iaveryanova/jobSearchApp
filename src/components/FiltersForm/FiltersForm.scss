@@ -108,20 +108,24 @@ h3 {
 }
 
 .industry-select {
-  .mantine-Select-root {
+  &.mantine-Select-root {
     width: 275px;
     height: 42px;
     font-family: Inter;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    border: 1px solid #d5d6dc;
-    
   }
+
   .mantine-Select-input {
     width: 275px;
     height: 42px;
     border-radius: 8px; 
+    border: 1px solid #d5d6dc;
+  }
+  
+  .mantine-Select-input:focus-within {
+    border: 1px solid #5E96FC;
   }
 
   .mantine-Input-rightSection {
@@ -129,8 +133,10 @@ h3 {
   }
 }
 
+
+
 .salary-input {
-  .mantine-Input-input {
+  .mantine-NumberInput-input {
     width: 275px;
     height: 42px;
     font-family: Inter;
@@ -139,17 +145,61 @@ h3 {
     line-height: 20px;
     border: 1px solid #d5d6dc;
     border-radius: 8px;
-  }
-  .mantine-Input-rightSection {
+
+    &:focus,&:focus-within{
+      border-color: #228be6;
+    }
+  } 
+
+  .mantine-NumberInput-rightSection{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 2.25rem;
+
+    button{
+      border: none;
+      &:nth-child(1){
+        margin-top: 3px;
+      }
+      &:nth-child(2){
+        margin-top: -5px;
+      }
+      &:hover{
+        background: none;
+        svg path{
+          stroke: #5e96fc;
+        }
+      }
+      svg path{
+        stroke: #acadb9;
+      }
+    }
   }
 }
 
+
 .salary-input-active {
-  .mantine-Input-input {
+  .mantine-NumberInput-rightSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 2.25rem;
+
+    button{
+      border: none;
+      &:nth-child(1){
+        margin-top: 3px;
+      }
+      &:nth-child(2){
+        margin-top: -5px;
+      }
+      &:hover{
+        background: none;
+      }
+    }
+  }
+  .mantine-NumberInput-input {
     width: 275px;
     height: 42px;
     font-family: Inter;
@@ -159,13 +209,11 @@ h3 {
     border: 1px solid #5e96fc;
     border-radius: 8px;
   }
-  .mantine-Input-rightSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 2.25rem;
-  }
 }
+
+ 
+
+
 .salary-input-active svg path {
   stroke: #92c1ff;
 }
@@ -197,4 +245,48 @@ h3 {
   line-height: 21px;
   border-radius: 8px;
   text-align: center;
+}
+
+
+@media (max-width: 420px) {
+  .filters-form {
+    width: 100%;
+  }
+  .industry-select {
+    &.mantine-Select-root {
+      width: 100%;
+    }
+  
+    .mantine-Select-input {
+      width: 100%;
+    }
+  }
+
+  .salary-input {
+    .mantine-NumberInput-input {
+      width: 100%;
+    }
+
+    .mantine-NumberInput-input {
+      width: 100%;
+    }
+  }
+
+  .salary-input-active {
+    .mantine-NumberInput-input {
+      width: 100%;
+    }
+
+    .mantine-NumberInput-input {
+      width: 100%;
+    }
+  }
+
+  .apply {
+    width: 100%;
+  }
+
+  .apply[data-disabled] {
+    width: 100%;
+  }
 }
