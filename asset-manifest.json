@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/jobSearchApp/static/css/main.2c6c16b1.css",
-    "main.js": "/jobSearchApp/static/js/main.4b676b7b.js",
+    "main.js": "/jobSearchApp/static/js/main.384884b8.js",
     "static/media/Man.svg": "/jobSearchApp/static/media/Man.e971983585ef9132b066.svg",
     "index.html": "/jobSearchApp/index.html",
     "main.2c6c16b1.css.map": "/jobSearchApp/static/css/main.2c6c16b1.css.map",
-    "main.4b676b7b.js.map": "/jobSearchApp/static/js/main.4b676b7b.js.map"
+    "main.384884b8.js.map": "/jobSearchApp/static/js/main.384884b8.js.map"
   },
   "entrypoints": [
     "static/css/main.2c6c16b1.css",
-    "static/js/main.4b676b7b.js"
+    "static/js/main.384884b8.js"
   ]
 }
