@@ -34,7 +34,6 @@ const SearchForm = ({ getVacancies }) => {
         data-elem="search-button"
         className="btn-search"
         onClick={searchVacancies}
-        disabled={!context.inputValue}
       >
         Поиск
       </Button>

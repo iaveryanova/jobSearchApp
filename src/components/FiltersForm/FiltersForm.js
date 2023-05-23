@@ -24,7 +24,7 @@ const FiltersForm = ({getVacancies}) => {
     getCatalogues();
     const isDisabledButtons = (context.selectedIndustryValue === null || context.selectedIndustryValue === '') && context.valueSalaryTo === "" && context.valueSalaryFrom === "";
     setButtonDisabled(isDisabledButtons);
-  }, []);
+  }, [context]);
 
 
   const getCatalogues = async () => {
@@ -162,7 +162,7 @@ return (
         data={categories}
         onDropdownOpen={handleSelectOpen}
         onDropdownClose={handleSelectClose}
-        styles={(theme) => ({
+        styles={() => ({
           item: {
             '&[data-selected]': {
               '&, &:hover': {
@@ -213,8 +213,7 @@ return (
 
     <Button 
     data-elem="search-button"
-    className="apply" 
-    disabled={buttonDisabled} 
+    className="apply"
     type="submit">
       Применить
     </Button>

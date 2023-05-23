@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import "./Home.scss";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import FiltersForm from "../../components/FiltersForm/FiltersForm";
@@ -8,6 +8,7 @@ import http from "../../http";
 import { Loader } from "@mantine/core";
 import { useSearchParams } from "react-router-dom";
 import NotFound from "../../components/NotFound/NotFound";
+import {TokenContext} from "../../App";
 
 export const SearchContext = React.createContext(null);
 
@@ -17,7 +18,7 @@ const Home = () => {
   const [searchParams] = useSearchParams();
   const itemsPerPage = 4;
 
-  const token = localStorage.getItem("token");
+  const token = useContext(TokenContext);
 
   const getVacancies = async (
     keyword = "",
@@ -38,10 +39,14 @@ const Home = () => {
       let newUrl = `/?catalogues=${catalogues}&keyword=${keyword}&payment_from=${payment_from}&payment_to=${payment_to}&page=${page}`;
       window.history.replaceState(null, "", newUrl);
     }
+    else{
+      window.history.replaceState(null, "", "/");
+    }
     setTotalVacancies(null);
 
+    const agreement = payment_from === "" && payment_to === "" ? 0 : 1;
     let vacanciesData = await http.get(
-      `/vacancies/?published=1&no_agreement=1&count=${itemsPerPage}&page=${
+      `/vacancies/?published=1&no_agreement=${agreement}&count=${itemsPerPage}&page=${
         page - 1
       }&catalogues=${catalogues}&keyword=${keyword}&payment_from=${payment_from}&payment_to=${payment_to}`,
       {
@@ -61,6 +66,7 @@ const Home = () => {
         salaryTo: item.payment_to,
         schedule: item.type_of_work.title,
         location: item.town.title,
+        agreement: item.agreement,
         id: item.id,
       };
     });
@@ -88,8 +94,10 @@ const Home = () => {
     setValueSalaryTo(initSalaryTo);
     setCurrentPage(page);
     setInputValue(initKeyword);
-    getVacancies(initKeyword, initSalaryFrom, initSalaryTo, initIndustry, page);
-  }, []);
+    if(token){
+      getVacancies(initKeyword, initSalaryFrom, initSalaryTo, initIndustry, page);
+    }
+  }, [token]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const currentItems = vacancies;
@@ -132,7 +140,7 @@ const Home = () => {
               const { id, ...itemProps } = item;
               return <VacancyCard key={id} id={id} {...itemProps} />;
             })
-          ) : totalVacancies == 0 ? (
+          ) : totalVacancies === 0 ? (
             <NotFound />
           ) : (
             <Loader className="loader" />

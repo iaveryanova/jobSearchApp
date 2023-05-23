@@ -50,6 +50,7 @@ const Favorites = () => {
           profession: item.profession,
           salaryFrom: item.payment_from,
           salaryTo: item.payment_to,
+          agreement: item.agreement,
           schedule: item.type_of_work.title,
           location: item.town.title,
           id: item.id,
@@ -86,7 +87,7 @@ const Favorites = () => {
               );
             })}
           </div>
-        ) : totalVacancies == 0 ? (
+        ) : totalVacancies === 0 ? (
           <>
             <NotFound />
             <Button onClick={routeChange} className="search-vacancies">

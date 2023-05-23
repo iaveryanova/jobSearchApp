@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import "./VacancyCard.scss";
 import { NavLink } from "react-router-dom";
 import { Button } from "@mantine/core";
-import { useParams } from "react-router-dom";
 
 const VacancyCard = ({
   id,
   profession,
   salaryFrom,
   salaryTo,
+  agreement,
   schedule,
   location,
-  removeCallback = (id) => {},
+  removeCallback = function (id) {
+  },
 }) => {
   let favoriteVacancies = localStorage.getItem("favorite");
 
@@ -59,6 +60,7 @@ const VacancyCard = ({
             onMouseLeave={() => setIsHovered(false)}
             leftIcon={
               <img
+                alt=""
                 src={
                   isClicked
                     ? "/img/Star_fill.svg"
@@ -75,17 +77,31 @@ const VacancyCard = ({
         <div className="vacancy-details">
           <p className="vacancy-salary">
             з/п
-            {(salaryTo !== 0 && salaryFrom !== 0) ?
-              (<> {salaryFrom} - {salaryTo} </>) : 
-              salaryTo === 0 ? (<> от {salaryFrom} </>) : (<> {salaryTo} </>)
+            { agreement ?
+              (<> по договоренности</>) :
+              (
+                  <>
+                  {(salaryTo === 0 && salaryFrom === 0) ?
+                    (<> не указана</>) :
+                    (
+                      (salaryTo !== 0 && salaryFrom !== 0) ?
+                          (<> {salaryFrom} - {salaryTo} </>) :
+                          (
+                              salaryTo === 0 ?
+                                  (<> от {salaryFrom} </>) :
+                                  (<> {salaryTo} </>)
+                          )
+                    )}
+                rub
+              </>
+              )
             }
-            rub
           </p>
-          <img src="/img/Delimiter.svg"></img>
+          <img alt="" src="/img/Delimiter.svg"></img>
           <p className="vacancy-schedule">{schedule}</p>
         </div>
         <div className="vacancy-location">
-          <img src="/img/Location.svg"></img>
+          <img alt="" src="/img/Location.svg"></img>
           <p>{location}</p>
         </div>
       </div>
