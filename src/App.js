@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./App.css";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
 import http from "./http";
@@ -34,10 +34,10 @@ const App = () => {
 
   return (
     <TokenContext.Provider value={token}>
-      <HashRouter>
+      <BrowserRouter>
         <NavBar />
         <AppRoutes />
-      </HashRouter>
+      </BrowserRouter>
     </TokenContext.Provider>
   );
 };
