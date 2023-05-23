@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <TokenContext.Provider value={token}>
-      <BrowserRouter>
+      <BrowserRouter basename='/jobSearchApp'>
         <NavBar />
         <AppRoutes />
       </BrowserRouter>
