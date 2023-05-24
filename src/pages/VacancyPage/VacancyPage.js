@@ -12,7 +12,7 @@ const VacancyPage = () => {
   let [vacancyInfo, setVacancyInfo] = useState("");
 
   const getVacancy = async () => {
-    const vacancyData = await http.get(`/vacancies/${id}`, {
+    const vacancyData = await http.get(`/vacancies/${id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
