@@ -14,9 +14,6 @@ const FiltersForm = ({ getVacancies }) => {
   const [isActiveNumberInputFrom, setIsActiveNumberInputFrom] = useState(false);
   const [isActiveNumberInputTo, setIsActiveNumberInputTo] = useState(false);
 
-  const handlersFrom = useRef();
-  const handlersTo = useRef();
-
   useEffect(() => {
     const isDisabledButtons =
       (context.selectedIndustryValue === null ||
@@ -198,7 +195,6 @@ const FiltersForm = ({ getVacancies }) => {
           }
           value={context.valueSalaryFrom}
           onChange={handleValueSalaryFromChange}
-          handlersRef={handlersFrom}
           onFocus={handleNumberInputFromFocus}
           onBlur={handleNumberInputFromBlur}
           placeholder="От"
@@ -213,7 +209,6 @@ const FiltersForm = ({ getVacancies }) => {
           }
           value={context.valueSalaryTo}
           onChange={handleValueSalaryToChange}
-          handlersRef={handlersTo}
           onFocus={handleNumberInputToFocus}
           onBlur={handleNumberInputToBlur}
           placeholder="До"
