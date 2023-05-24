@@ -26,7 +26,7 @@ const SearchForm = ({ getVacancies }) => {
         type="text"
         className="input-search"
         placeholder="Введите название вакансии"
-        value={context.inputValue || ''}
+        value={context.inputValue || ""}
         onChange={handleInputChange}
       />
 

@@ -9,30 +9,16 @@ const VacancyPage = () => {
   const token = localStorage.getItem("token");
   let { id } = useParams();
 
-  let [profession, setProfession] = useState("");
-  let [salaryFrom, setSalaryFrom] = useState("");
-  let [agreement, setAgreement] = useState("");
-  let [salaryTo, setSalaryTo] = useState("");
-  let [schedule, setSchedule] = useState("");
-  let [location, setLocation] = useState("");
-  let [informationForCandidate, setInformationForCandidate] = useState("");
-  let [idVacancy, setIdVacancy] = useState("");
+  let [vacancyInfo, setVacancyInfo] = useState("");
 
   const getVacancy = async () => {
-    let vacancyData = await http.get(`/vacancies/${id}`, {
+    const vacancyData = await http.get(`/vacancies/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    setInformationForCandidate(vacancyData.data.vacancyRichText);
-    setProfession(vacancyData.data.profession);
-    setSalaryFrom(vacancyData.data.payment_from);
-    setSalaryTo(vacancyData.data.payment_to);
-    setAgreement(vacancyData.data.agreement);
-    setSchedule(vacancyData.data.type_of_work.title);
-    setLocation(vacancyData.data.town.title);
-    setIdVacancy(vacancyData.data.id);
+    setVacancyInfo(vacancyData.data);
   };
 
   useEffect(() => {
@@ -41,22 +27,22 @@ const VacancyPage = () => {
 
   return (
     <div className="vacancy-page">
-      {profession ? (
+      {vacancyInfo.profession ? (
         <>
           <VacancyCard
             className="vacancy-page-card"
-            id={idVacancy}
-            profession={profession}
-            salaryFrom={salaryFrom}
-            agreement={agreement}
-            salaryTo={salaryTo}
-            schedule={schedule}
-            location={location}
+            id={vacancyInfo.id}
+            profession={vacancyInfo.profession}
+            salaryFrom={vacancyInfo.payment_from}
+            agreement={vacancyInfo.agreement}
+            salaryTo={vacancyInfo.payment_to}
+            schedule={vacancyInfo.type_of_work.title}
+            location={vacancyInfo.town.title}
           />
 
           <div
             className="info-candidate"
-            dangerouslySetInnerHTML={{ __html: informationForCandidate }}
+            dangerouslySetInnerHTML={{ __html: vacancyInfo.vacancyRichText }}
           ></div>
         </>
       ) : (

@@ -11,8 +11,7 @@ const VacancyCard = ({
   agreement,
   schedule,
   location,
-  removeCallback = function (id) {
-  },
+  removeCallback = function (id) {},
 }) => {
   let favoriteVacancies = localStorage.getItem("favorite");
 
@@ -44,9 +43,7 @@ const VacancyCard = ({
   };
 
   return (
-    <div 
-    data-elem={"vacancy-" + id}
-    className="vacancy-card">
+    <div data-elem={"vacancy-" + id} className="vacancy-card">
       <div className="vacancy-data">
         <div className="title">
           <NavLink to={"/vacancy/" + id} className="vacancy-title">
@@ -77,25 +74,25 @@ const VacancyCard = ({
         <div className="vacancy-details">
           <p className="vacancy-salary">
             з/п
-            { agreement ?
-              (<> по договоренности</>) :
-              (
+            {agreement ? (
+              <> по договоренности</>
+            ) : (
+              <>
+                {salaryTo === 0 && salaryFrom === 0 ? (
+                  <> не указана</>
+                ) : salaryTo !== 0 && salaryFrom !== 0 ? (
                   <>
-                  {(salaryTo === 0 && salaryFrom === 0) ?
-                    (<> не указана</>) :
-                    (
-                      (salaryTo !== 0 && salaryFrom !== 0) ?
-                          (<> {salaryFrom} - {salaryTo} </>) :
-                          (
-                              salaryTo === 0 ?
-                                  (<> от {salaryFrom} </>) :
-                                  (<> {salaryTo} </>)
-                          )
-                    )}
+                    {" "}
+                    {salaryFrom} - {salaryTo}{" "}
+                  </>
+                ) : salaryTo === 0 ? (
+                  <> от {salaryFrom} </>
+                ) : (
+                  <> {salaryTo} </>
+                )}
                 rub
               </>
-              )
-            }
+            )}
           </p>
           <img alt="" src="/img/Delimiter.svg"></img>
           <p className="vacancy-schedule">{schedule}</p>

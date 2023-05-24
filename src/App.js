@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
@@ -19,14 +19,12 @@ const App = () => {
     localStorage.setItem("ttl", authInfo.data.ttl);
   };
 
-
   useEffect(() => {
     const ttl = localStorage.getItem("ttl") ?? false;
     if (!localStorage.getItem("token") || !ttl) {
-        authMethod();
-    }
-    else{
-      if(ttl < Date.now()/1000){
+      authMethod();
+    } else {
+      if (ttl < Date.now() / 1000) {
         authMethod();
       }
     }
