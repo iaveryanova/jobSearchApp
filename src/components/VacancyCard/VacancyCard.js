@@ -94,11 +94,11 @@ const VacancyCard = ({
               </>
             )}
           </p>
-          <img alt="" src="/img/Delimiter.svg"></img>
+          <img alt="" src="/img/Delimiter.svg" />
           <p className="vacancy-schedule">{schedule}</p>
         </div>
         <div className="vacancy-location">
-          <img alt="" src="/img/Location.svg"></img>
+          <img alt="" src="/img/Location.svg" />
           <p>{location}</p>
         </div>
       </div>

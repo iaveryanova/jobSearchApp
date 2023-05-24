@@ -20,7 +20,7 @@ const SearchForm = ({ getVacancies }) => {
   };
   return (
     <div className="search">
-      <img src="/img/Search.svg" alt=""></img>
+      <img src="/img/Search.svg" alt="" />
       <input
         data-elem="search-input"
         type="text"
