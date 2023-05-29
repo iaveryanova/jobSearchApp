@@ -7,12 +7,17 @@ import http from "./http";
 
 export const TokenContext = React.createContext(null);
 
+const login = process.env.REACT_APP_LOGIN;
+const password = process.env.REACT_APP_PASSWORD;
+const clientId = process.env.REACT_APP_CLIENT_ID;
+const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+
 const App = () => {
   const initToken = localStorage.getItem("token") ?? null;
   const [token, setToken] = useState(initToken);
   const authMethod = async () => {
     let authInfo = await http.get(
-      "/oauth2/password?login=sergei.stralenia@gmail.com&password=paralect123&client_id=2356&client_secret=v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948&hr=0"
+      `/oauth2/password?login=${login}&password=${password}&client_id=${clientId}&client_secret=${clientSecret}&hr=0`
     );
     localStorage.setItem("token", authInfo.data.access_token);
     setToken(authInfo.data.access_token);
